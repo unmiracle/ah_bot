@@ -1,14 +1,15 @@
-
+from multiprocessing import Value
 
 
 class Config:
     catched = 0
 
-    stopping = False
-    is_buy_enabled = True
+    running = Value('b', True)
+    is_buy_enabled = Value('b', True)
+
+    afk_timeout_min = 20
 
     pixels_offset = 70
-    time = ""
 
     # locations
     auction_house_btn = (2290, 380)
@@ -17,6 +18,11 @@ class Config:
     count_from_location = (2334, 510)
 
     item_header_text = (810, 494)
+
+
+    # delays
+    monitor_delay = 0.02
+    reset_click_delay = 0.01
 
 
     # colors

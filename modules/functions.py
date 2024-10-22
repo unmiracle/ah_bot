@@ -19,49 +19,25 @@ def get_time():
     """
     return datetime.now().strftime("%Y-%m-%d %H-%M-%S")
 
-def is_win():
-    from sys import platform
-    if platform == "win32":
-        return True
-    else:
-        return False
+# def is_win():
+#     from sys import platform
+#     if platform == "win32":
+#         return True
+#     else:
+#         return False
     
-
-def is_focused():
-    """
-    Check if the application is in focus
-    Returns True/False
-
-    is_focused()
-    """
-    if is_win():
-        import win32gui,win32process
-        focus_window_pid = win32process.GetWindowThreadProcessId(win32gui.GetForegroundWindow())[1]
-        current_process_pid = os.getppid()
-
-        return focus_window_pid == current_process_pid
-    else:
-        return True
-
-
-
 
 class Hotkeys:
     def start_recording():
-        """
-        Start listening for keyboard hotkeys
-        
-        X = Exit Program | S = Save Remaining Lines
-        """
         from keyboard import add_hotkey
         def stop_checking_func():
-            """
-            Terminate the thread pool
-            """
-            if is_focused():
-                Config.stopping = True
-        add_hotkey('x',stop_checking_func)
+            print('Trying to stop....')
+            Config.running.value = False
+            exit_program()
+        
+        print('Record started')
+        add_hotkey('space',stop_checking_func)
+
     def stop_recording():
-        """Stop listening for hotkeys"""
         from keyboard import clear_all_hotkeys
         clear_all_hotkeys()
