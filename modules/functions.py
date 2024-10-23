@@ -36,7 +36,7 @@ class Hotkeys:
             exit_program()
         
         print('Record started')
-        add_hotkey('space',stop_checking_func)
+        add_hotkey(Config.stop_btn, stop_checking_func)
 
     def stop_recording():
         from keyboard import clear_all_hotkeys
